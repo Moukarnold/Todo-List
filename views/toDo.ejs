@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>todo</title>
 </head>
-
+<header></header>
 <body>
     <h1> Welcome to your Task planner</h1>
    
@@ -20,7 +20,7 @@
         
         <div>
           
-          <label for="theTime">Heure :</label>
+          <label for="theTime">Time :</label>
           <input type="time" id="theTime" name="time">
         </div>
       
@@ -45,17 +45,17 @@
         <div>
             <ul>
                 <% groupedTasks[date].forEach(task => { %>
-                    <li><%= task.task %> at <%= task.time %></li>
+                    <li ><%= task.task %> at <%= task.time %></li>
                 <% }); %>
             </ul>
+            <a href="/workList?date=<%= date %>"><button> more...</button></a>
         </div>
     <% } %>
 <% } %>
   
   
    </div>
-    <button> add a new task</button>
- 
+  
 
 </body>
 </html>

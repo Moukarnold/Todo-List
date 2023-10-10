@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work List</title>
+</head>
+<header></header>
+<body>
+    <h1>Tasks for <%= date %></h1>
+
+    <ul>
+        <% tasks.forEach(task => { %>
+            <li><%= task.task %> at <%= task.time %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
