@@ -32,14 +32,26 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(createTasks);
 
 app.get("/", (req, res)=>{
- res.render("toDo",{tasks: res.locals.toDoList});
+ res.render("toDo",{tasks: toDoList});
 });
 
+app.get("/workList", (req, res)=>{
+
+  const requestedDate = req.query.date;
+  const requestedTasks = toDoList.filter((task)=>task.date === requestedDate ) 
+  
+  res.render("workList", { tasks: requestedTasks, date: requestedDate });
+
+})
 
 app.post("/",(req, res)=>{
     
-  res.render("toDo",{tasks: res.locals.toDoList})
+  res.render("toDo",{tasks: toDoList});
+  
 });
+
+
+
 
 
 app.listen( port, ()=>{
