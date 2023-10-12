@@ -3,13 +3,19 @@
 
 
     <h1 class="welcome">Tasks for <%= date %></h1>
-
-    <ul class="activities">
+    <div class="worklist">
+    <div class=" activities-list">
+     <ul >
         <% tasks.forEach(task => { %>
+         <div >
+            <label for="<%= task.id %>" class="<% if (task.completed) { %>completed<% } %>">
+           <input type="checkbox" id="<%= task.id %>" name="taskCheckbox" class="task-checkbox" <% if (task.completed) { %>checked<% } %>>
             <li ><%= task.task %> at <%= task.time %></li>
+        </div>
         <% }); %>
     </ul>
-
+</div>
+</div>
 
     <h2 class="welcome">add new tasks :</h2>
 

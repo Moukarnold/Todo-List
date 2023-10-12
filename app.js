@@ -1,5 +1,8 @@
 import express  from "express";
 import bodyParser from "body-parser";
+import uuid from 'uuid';
+const uuidv4 = uuid.v4;
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,11 +16,14 @@ function createTasks(req, res, next){
     const theTask = req.body.task;
     
     if( theTask && theDay && theTime) {
+      const taskId= uuidv4();
         toDoList.push({
+              id:taskId,
             date: theDay,
             time: theTime,
             task: theTask,
           });
+          console.log('Task ID:', taskId);
 
           res.locals.toDoList= toDoList;
     
@@ -35,6 +41,7 @@ app.use(createTasks);
 
 
 app.get("/", (req, res)=>{
+  
  res.render("toDo",{tasks: toDoList});
 });
 
@@ -54,22 +61,27 @@ app.post("/workList", (req, res)=>{
     const newTask= req.body.task;
     const newTime= req.body.time;
     const date= req.body.date;
+    const id = req.body.id;
 
-
-  if (newTask && date) {
-    const existingTask = toDoList.find(task => task.date === date && task.task === newTask);
+  if (newTask && date && id) {
+    const existingTask = toDoList.find(task => task.date === date && task.task === newTask && task.id===id);
 
     if (!existingTask) {
       toDoList.push({
+        id: id,
         date: date,
         time: newTime,
         task: newTask,
       });
     }
+   
   }
     res.redirect(`/workList?date=${date}`);
 })
 
+app.get("/todos-list",(req, res)=>{
+   res.render("toDoList", {tasks: toDoList})
+})
 
 app.listen( port, ()=>{
     console.log(" server on port", port);
