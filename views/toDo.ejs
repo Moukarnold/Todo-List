@@ -35,7 +35,7 @@
     <% tasks.forEach(task => { %>
         <% if (!groupedTasks[task.date]) { %>
             <% groupedTasks[task.date] = []; %>
-        <% } %>
+        <%  } %>
         <% groupedTasks[task.date].push(task); %>
     <% }); %>
     <% for (const date in groupedTasks) { %>
@@ -44,7 +44,7 @@
          <div >
             <ul >
                 <% groupedTasks[date].forEach(task => { %>
-                    <li class="activities" ><%= task.task %> at <%= task.time %></li>
+                    <li class="activities" ><%= task.task %> at <%= task.time %> </li>
                 <% }); %>
             </ul>
             <a href="/workList?date=<%= date %>"><button> more...</button></a>
